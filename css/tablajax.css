@@ -1,0 +1,265 @@
+/*!
+@author Oscar Alderete <me@oscaralderete.com>
+@website http://oscaralderete.com
+@version 1.0.0
+*/
+
+:root {
+	--tablajax-main-color: #5885af;
+	--tablajax-main-border: solid 1px var(--tablajax-main-color);
+	--tablajax-head-background: linear-gradient(var(--tablajax-main-color), var(--tablajax-main-color));
+	--tablajax-head-color: #fff;
+	--tablajax-cell-padding: .8rem 1rem;
+	--tablajax-zebra-background: #D9E3ED;
+	--tablajax-font-family: 'Poppins', sans-serif;
+	--tablajax-font-size: 1rem;
+	--tablajax-icon-height: calc(1.5rem * .8);
+	--tablajax-icon-width: calc(1rem * .8);
+	--tablajax-icon-width-alt: calc(1.3rem * .8);
+	--tablajax-icon-menu-path-color: #000;
+	--tablajax-btn-width: 3rem;
+	--tablajax-btn-search-bg-color: #55B78D;
+	--tablajax-btn-reset-bg-color: #D22E25;
+}
+
+table.tablajax {
+	padding: 0;
+	margin: 0;
+	background: #fff;
+	border: var(--tablajax-main-border);
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.tablajax tfoot td,
+table.tablajax thead th {
+	font-family: var(--tablajax-font-family);
+	font-size: var(--tablajax-font-size);
+	padding: var(--tablajax-cell-padding);
+	color: var(--tablajax-head-color);
+	text-align: right;
+}
+
+table.tablajax tbody td {
+	font-size: var(--tablajax-font-size);
+	padding: var(--tablajax-cell-padding);
+}
+
+table.tablajax tbody td.center {
+	text-align: center;
+}
+
+table.tablajax tbody td.right {
+	text-align: right;
+}
+
+table.tablajax thead {
+	background: var(--tablajax-head-background);
+}
+
+table.tablajax thead tr {
+	height: auto;
+	font: 700 16px var(--tablajax-font-family);
+}
+
+table.tablajax thead th {
+	text-align: center;
+}
+
+table.tablajax thead th.action {
+	width: 2em;
+	overflow: hidden;
+}
+
+table.tablajax thead th.sorter_on {
+	cursor: pointer;
+}
+
+table.tablajax tbody tr {
+	border-bottom: solid 1px #66A3FF;
+}
+
+table.tablajax tbody tr:last-child {
+	border-bottom: none;
+}
+
+table.tablajax tbody tr:nth-child(even) {
+	background-color: var(--tablajax-zebra-background);
+}
+
+table.tablajax tbody tr:hover {
+	background-color: #FFFFBF;
+}
+
+table.tablajax tbody td.action {
+	width: 2em;
+	position: relative;
+}
+
+table.tablajax tbody td.action.selected>ul {
+	display: block;
+}
+
+table.tablajax tbody td.action>a {
+	display: block;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+table.tablajax tbody td.action>ul {
+	list-style-type: none;
+	position: absolute;
+	background: #fff;
+	box-shadow: 0 0 4px #000;
+	z-index: 30;
+	overflow: visible;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	border: solid 1px #ccc;
+	display: none;
+}
+
+table.tablajax tbody td.action>ul.visible {
+	display: block;
+}
+
+table.tablajax tbody td.action>ul>li {
+	border-top: solid 1px #ccc;
+	white-space: nowrap;
+}
+
+table.tablajax tbody td.action>ul>li:first-child {
+	border-top: none;
+}
+
+table.tablajax tbody td.action>ul>li>a {
+	display: block;
+	text-align: left;
+	padding: .5em;
+	cursor: pointer;
+}
+
+table.tablajax tbody td.action>ul>li>a:hover {
+	background-color: #FFFFBF;
+}
+
+table.tablajax tbody td.action>ul>li>p {
+	text-align: left;
+	padding: .5em;
+}
+
+table.tablajax tbody td.action svg {
+	cursor: pointer;
+}
+
+table.tablajax tbody td.action svg>path {
+	fill: var(--tablajax-icon-menu-path-color);
+}
+
+table.tablajax tfoot tr {
+	background: var(--tablajax-head-background);
+}
+
+table.tablajax tfoot td span {
+	cursor: pointer;
+}
+
+table.tablajax tfoot td span.tablajax_totals {
+	float: left;
+	margin: 0;
+}
+
+table.tablajax tfoot td select {
+	color: #000;
+}
+
+table.tablajax tfoot .tdNavigation,
+table.tablajax tfoot .navigationCommands {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+table.tablajax tfoot .navigationCommands {
+	gap: .5rem;
+}
+
+table.tablajax tfoot .icoNavigation {
+	height: var(--tablajax-icon-height);
+	cursor: pointer;
+}
+
+table.tablajax tfoot .icoNavigation.icoFirst {
+	width: var(--tablajax-icon-width-alt);
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 130 150' version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='130' height='150'%3E%3Cstyle%3E.fill%7Bfill:white;%7D%3C/style%3E%3Cpath class='fill' d='M 130 0 L 30 75 L 130 150 L 130 0 Z'/%3E%3Crect class='fill' x='0' y='0' width='30' height='150'/%3E%3C/svg%3E") center center no-repeat transparent;
+	background-size: var(--tablajax-icon-width-alt) var(--tablajax-icon-height);
+}
+
+table.tablajax tfoot .icoNavigation.icoPrevious {
+	width: var(--tablajax-icon-width);
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 150' version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='100' height='150'%3E%3Cstyle%3E.fill%7Bfill:white;%7D%3C/style%3E%3Cpath class='fill' d='M 100 0 L 0 75 L 100 150 L 100 0 Z'/%3E%3C/svg%3E") center center no-repeat transparent;
+	background-size: var(--tablajax-icon-width) var(--tablajax-icon-height);
+}
+
+table.tablajax tfoot .icoNavigation.icoNext {
+	width: var(--tablajax-icon-width);
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 150' version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='100' height='150'%3E%3Cstyle%3E.fill%7Bfill: white;%7D%3C/style%3E%3Cpath class='fill' d='M 0 150 L 100 75 L 0 0 L 0 150 Z'/%3E%3C/svg%3E") center center no-repeat transparent;
+	background-size: var(--tablajax-icon-width) var(--tablajax-icon-height);
+}
+
+table.tablajax tfoot .icoNavigation.icoLast {
+	width: var(--tablajax-icon-width-alt);
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 130 150' version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='130' height='150'%3E%3Cstyle%3E.fill%7Bfill: white;%7D%3C/style%3E%3Cpath class='fill' d='M 0 150 L 100 75 L 0 0 L 0 150 Z'/%3E%3Crect class='fill' x='100' y='0' width='30' height='150'/%3E%3C/svg%3E") center center no-repeat transparent;
+	background-size: var(--tablajax-icon-width-alt) var(--tablajax-icon-height);
+}
+
+table.tablajax tfoot .icoNavigation.disabled {
+	opacity: .25;
+	cursor: none;
+}
+
+/* searcher */
+.tablajax_searcher {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 1rem;
+	column-gap: .25rem;
+}
+
+.tablajax_searcher>input {
+	font-size: var(--tablajax-font-size);
+	font-family: var(--tablajax-font-family);
+}
+
+.tablajax_searcher input.inputSearch {
+	flex: 1;
+	padding: calc(var(--tablajax-font-size) / 2);
+	box-sizing: border-box;
+	border-radius: 6px;
+	border: solid 1px #ccc;
+}
+
+.tablajax_searcher input.buttonSearch,
+.tablajax_searcher input.buttonReset {
+	width: var(--tablajax-btn-width);
+	cursor: pointer;
+}
+
+.tablajax_searcher input.buttonSearch {
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve' x='0' y='0' width='128' height='128'%3E%3Cpath class='icon-search' d='M 74.2467 29.3773 C 61.8562 16.9868 41.7678 16.9868 29.3773 29.3773 C 16.9868 41.7678 16.9868 61.8562 29.3773 74.2467 C 41.7678 86.6372 61.8562 86.6371 74.2467 74.2467 C 86.6372 61.8562 86.6372 41.7678 74.2467 29.3773 ZM 88.4485 15.1755 C 107.1497 33.8768 108.5666 63.3164 92.6987 83.6445 C 93.7433 83.6109 95.2115 83.667 96.6392 83.8925 C 98.0989 83.8255 99.5802 84.3493 100.6949 85.464 L 108.0016 92.7707 L 126.4228 111.1919 C 128.5257 113.2949 128.5257 116.7043 126.4228 118.8073 L 118.8073 126.4228 C 116.7043 128.5258 113.2949 128.5258 111.1919 126.4228 L 92.7707 108.0016 L 85.464 100.6949 L 85.4589 100.6898 L 85.4537 100.6846 C 84.3836 99.6097 83.8625 98.1967 83.8874 96.7904 C 83.6307 95.3299 83.5556 93.8136 83.5807 92.7481 C 63.2548 108.5634 33.8572 107.1302 15.1755 88.4485 C -5.0585 68.2144 -5.0585 35.4095 15.1755 15.1755 C 35.4095 -5.0585 68.2144 -5.0585 88.4485 15.1755 Z'/%3E%3C/svg%3E") center center no-repeat var(--tablajax-btn-search-bg-color);
+	background-size: calc(var(--tablajax-btn-width) / 2.5) auto;
+	border: none;
+	border-radius: 6px;
+}
+
+.tablajax_searcher input.buttonReset {
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='128' height='128'%3E%3Cpath d='M 0 64.0565 C 0 99.372 28.6533 128 64 128 C 90.6214 128 113.4444 111.7597 123.0907 88.6553 L 105.0771 81.1575 C 98.3718 97.2181 82.5053 108.505 64 108.505 C 39.4297 108.505 19.5122 88.6051 19.5122 64.0565 C 19.5122 39.508 39.4297 19.608 64 19.608 C 76.2567 19.608 87.3533 24.5614 95.399 32.5722 L 76.3746 51.5798 L 128 51.5798 L 128 0 L 109.198 18.7853 C 97.6211 7.2469 81.6447 0.1131 64 0.1131 C 28.6533 0.1131 0 28.7411 0 64.0565 Z' fill='%23000'/%3E%3C/svg%3E") center center no-repeat var(--tablajax-btn-reset-bg-color);
+	background-size: calc(var(--tablajax-btn-width) / 2.5) auto;
+	border: none;
+	border-radius: 6px;
+}

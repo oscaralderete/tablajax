@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tablajax 10th Edition</title>
+		<link rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/agate.min.css">
+		<link rel="stylesheet" href="css/OADialogs.1.0.0.css">
+		<link rel="stylesheet" href="css/OAToast.1.0.0.css">
+
+		<!-- Tablajax CSS file, this one is required -->
+		<link rel="stylesheet" href="css/tablajax.css">
+		<style>
+			body {
+				font-family: 'Poppins', sans-serif;
+			}
+
+			.separator {
+				height: 1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Tablajax - Joined Tables Example</h1>
+
+		<p>This table uses a little more complex SQL query but it renders perfect too. BTW I'm using the famous MySQL's
+			<b>World Database</b> available here:
+			<br>
+			<a href="https://dev.mysql.com/doc/index-other.html"
+				target="_blank">https://dev.mysql.com/doc/index-other.html</a>
+			<br>
+			This table is sortable by <b>Language</b>, <b>Official language</b> and <b>Spoken by (%)</b> columns. The
+			action opens an external link.
+		</p>
+
+		<p>In case you haven't noticed yet, this example includes the integrated searcher.</p>
+
+		<!-- integrated sercher -->
+		<section id="tablajax_searcher" class="tablajax_searcher">
+			<input type="text" class="inputSearch" placeholder="Search by Country or Language">
+			<input type="button" class="buttonSearch" title="Perform search">
+			<input type="button" class="buttonReset" title="Reset search">
+		</section>
+		<div id="tablajax">
+			<!-- dynamic table will be rendered here... -->
+		</div>
+
+		<div class="separator"></div>
+
+		<p>You need to specify the columns you want to retrieve, so:
+		<pre>SELECT * FROM foo ORDER BY name</pre> will throw an error. Below you'll find a more detailed example of the
+		PHP file where the SQL query is placed.
+		</p>
+
+		<pre>
+			<code class="php">
+&lt;?php
+
+//searcher
+$where='1';
+if(isset($_GET['s']) && trim($_GET['s']) !== ''){
+	$where = ' Name LIKE "%' . $_GET['s'] . '%" OR Language LIKE "%' . $_GET['s'] . '%"';
+}
+
+$table_rows = 20;
+
+$navigationMemory = true;
+
+$labels = [
+	['title' =&gt; 'Country code', 'align' =&gt; 'center', 'sorter' =&gt; ''],
+	['title' =&gt; 'Country', 'align' =&gt; '', 'sorter' =&gt; ''],
+	['title' =&gt; 'Language', 'align' =&gt; '', 'sorter' =&gt; 'text'],
+	['title' =&gt; 'Official language', 'align' =&gt; 'center', 'sorter' =&gt; 'text'],
+	['title' =&gt; 'Spoken by (%)', 'align' =&gt; 'right', 'sorter' =&gt; 'number'],
+	['title' =&gt; 'Action', 'align' =&gt; 'center', 'sorter' =&gt; ''],
+];
+
+$mainQuery = '
+SELECT
+	CountryCode,
+	Name,
+	Language,
+	IF(IsOfficial = "T", "True", "False") as is_official,
+	Percentage,
+	CONCAT("&lt;a target=\"_blank\" href=\"https://countrycode.dev/api/countries/iso3/", Code, "\"&gt;JSON info&lt;/a&gt;") AS act01
+FROM
+	country c INNER JOIN countrylanguage cl ON c.Code = cl.CountryCode
+WHERE
+	' . $where . '
+ORDER BY
+	Name ASC
+';
+
+$totalQuery = '
+SELECT
+	COUNT(*) total
+FROM
+	country c INNER JOIN countrylanguage cl ON c.Code = cl.CountryCode
+WHERE
+	' . $where;
+
+$fixedNumberRows = true;
+
+
+
+$noRecordsMsg = '&lt;b&gt;NO RECORDS FOUND!&lt;/b&gt;';
+
+include '../tablajax.php';
+			</code>
+		</pre>
+
+
+		<oa-dialogs></oa-dialogs>
+		<oa-toast></oa-toast>
+
+		<!-- Tablajax required scripts: jQuery & tablajax.js -->
+		<script src="js/jquery.3.6.1.js"></script>
+		<script src="js/tablajax.1.0.0.js"></script>
+
+		<!-- these libraries aren't required I used them for a better UX -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/sql.min.js"></script>
+		<script src="js/OADialogs.1.0.0.js"></script>
+		<script src="js/OAToast.1.0.0.js"></script>
+
+
+		<!-- PHP files with the SQL queries, they are required -->
+		<script src="tablajax/languages.php"></script>
+
+		<!-- additional JS file for custom Tablajax actions -->
+		<script src="js/scripts.js"></script>
+	</body>
+
+</html>
