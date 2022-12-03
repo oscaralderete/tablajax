@@ -2,7 +2,7 @@
 
 ## Render a functional data table with just a SQL query
 
-<hr>
+<br>
 
 Ten years ago I presented a resource to display a functional data table created from a mere SQL query.
 
