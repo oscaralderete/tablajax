@@ -18,5 +18,8 @@ This version is a refactorization, it's 100% functional but isn't practical and 
 
 This repository is to celebrate 10 years of a fantastic tool. If you're a SQL guy I'm pretty sure you'll find it really interesting.
 
-There's a live sample here:
+There are a live examples here:
+<br>
 https://oscaralderete.com/tablajax
+<br>
+https://oscaralderete.com/tablajax/second-demo.php
